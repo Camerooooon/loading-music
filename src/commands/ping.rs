@@ -1,10 +1,10 @@
-use serenity::builder::CreateApplicationCommand;
-use serenity::model::prelude::interaction::application_command::CommandDataOption;
+use crate::{Context, Error};
 
-pub fn run(_options: &[CommandDataOption]) -> String {
-    "The bot is online :sunglasses:".to_string()
-}
-
-pub fn register(command: &mut CreateApplicationCommand) -> &mut CreateApplicationCommand {
-    command.name("ping").description("A ping command")
+#[poise::command(slash_command, prefix_command)]
+pub async fn ping(
+    ctx: Context<'_>,
+) -> Result<(), Error> {
+    let response = "Hi";
+    ctx.say(response).await?;
+    Ok(())
 }
