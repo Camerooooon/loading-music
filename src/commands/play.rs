@@ -14,8 +14,8 @@ pub async fn play(
 
     thread::sleep(time::Duration::from_millis(1000));
 
-    session::create_session(&ctx)?;
-    let mut session = ctx.data().sessions.blocking_lock().get(&ctx.guild_id().expect("Command was not executed in a guild!")).expect("Could not create session");
+    session::create_session(&ctx).await?;
+    let mut session = ctx.data().sessions.lock().await.get(&ctx.guild_id().expect("Command was not executed in a guild!")).expect("Could not create session");
 
     reply.edit(ctx, |m| m.embed(|e| e.description(format!(":skull: **Failed** no results returned for *{}*", query)).color(0xc0392b))).await?;
     Ok(())

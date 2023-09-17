@@ -23,7 +23,7 @@ async fn main() {
 
     let framework = poise::Framework::builder()
     .options(poise::FrameworkOptions {
-        commands: vec![commands::ping::ping(), commands::play::play()],
+        commands: vec![commands::ping::ping(), commands::play::play(), commands::sessions::sessions()],
         ..Default::default()
     })
     .token(token)
@@ -35,7 +35,7 @@ async fn main() {
         })
     });
 
+    println!("Client is starting wooo!");
     framework.run().await.unwrap();
 
-    println!("Client is online");
 }

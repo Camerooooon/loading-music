@@ -7,11 +7,11 @@ use super::queue::Queue;
 
 pub struct Session {
     queue: Queue,
-    guild: Guild,
+    pub guild: Guild,
     paused: bool,
 }
 
-pub fn create_session<'a>(context: &'a Context<'a>) -> Result<(), Error> {
+pub async fn create_session<'a>(context: &'a Context<'a>) -> Result<(), Error> {
 
     let session = Session {
         queue: Queue::default(),
@@ -19,7 +19,7 @@ pub fn create_session<'a>(context: &'a Context<'a>) -> Result<(), Error> {
         paused: false
     };
 
-    let mut sessions = context.data().sessions.blocking_lock();
+    let mut sessions = context.data().sessions.lock().await;
 
     if sessions.contains_key(&context.guild_id().expect("No guild")) {
         return Ok(())
