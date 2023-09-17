@@ -9,6 +9,7 @@ mod commands;
 
 use serenity::prelude::GatewayIntents;
 
+
 #[tokio::main]
 async fn main() {
     dotenv().ok();
@@ -17,7 +18,7 @@ async fn main() {
 
     let framework = poise::Framework::builder()
     .options(poise::FrameworkOptions {
-        commands: vec![commands::ping::ping()],
+        commands: vec![commands::ping::ping(), commands::play::play()],
         ..Default::default()
     })
     .token(token)
