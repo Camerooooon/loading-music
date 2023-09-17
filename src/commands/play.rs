@@ -2,8 +2,6 @@
 use core::time;
 use std::thread;
 
-use poise::CreateReply;
-
 use crate::{Context, Error};
 
 #[poise::command(slash_command, prefix_command)]
