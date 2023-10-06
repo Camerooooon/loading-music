@@ -71,5 +71,7 @@ pub async fn play(
         })
         .await?;
 
+    session.start_playback(&ctx).await;
+
     Ok(())
 }
