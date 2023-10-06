@@ -1,4 +1,5 @@
 use dotenv::dotenv;
+use songbird::SerenityInit;
 use std::{collections::HashMap, env, sync::Arc};
 
 pub struct Data {
@@ -59,10 +60,12 @@ async fn main() {
                 commands::play::play(),
                 commands::queue::queue(),
                 commands::sessions::sessions(),
+                commands::join::join(),
             ],
             ..Default::default()
         })
         .token(discord_token)
+            .client_settings(|builder| builder.register_songbird())
         .intents(GatewayIntents::non_privileged())
         .setup(|ctx, _ready, framework| {
             Box::pin(async move {
