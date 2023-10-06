@@ -57,6 +57,7 @@ async fn main() {
             commands: vec![
                 commands::ping::ping(),
                 commands::play::play(),
+                commands::queue::queue(),
                 commands::sessions::sessions(),
             ],
             ..Default::default()
