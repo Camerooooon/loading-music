@@ -1,15 +1,18 @@
-use super::song::Song;
+use poise::serenity_prelude::User;
 
+use super::song::{Song, SongRequest};
+
+#[derive(Clone)]
 pub struct Queue {
-    pub songs: Vec<Song>
+    pub requests: Vec<SongRequest>,
 }
 
 impl Queue {
-    fn add_to_queue(&mut self, song: Song) {
-        self.songs.push(song);
+    pub fn add_to_queue(&mut self, song: Song, queued_by: User) {
+        self.requests.push(SongRequest { song, queued_by });
     }
 
     pub(crate) fn default() -> Queue {
-        Queue { songs: vec![] }
+        Queue { requests: vec![] }
     }
 }
